@@ -1,6 +1,11 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, $ionicModal, TwittSrv){
+.controller('TabsCtrl', function($scope){
+  'use strict';
+
+})
+
+.controller('TwittsCtrl', function($scope, $ionicModal, TwittSrv){
   'use strict';
   TwittSrv.getTwitts().then(function(twitts){
     $scope.twitts = twitts;
@@ -49,4 +54,14 @@ angular.module('app')
   $scope.$on('$destroy', function(){
     newTwittModal.remove();
   });
+})
+
+.controller('NotificationsCtrl', function($scope){
+  'use strict';
+
+})
+
+.controller('ProfilCtrl', function($scope){
+  'use strict';
+
 });

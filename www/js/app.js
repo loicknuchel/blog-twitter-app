@@ -3,12 +3,40 @@ angular.module('app', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider){
   'use strict';
   $stateProvider
-  .state('app', {
-    url: '/app',
-    templateUrl: 'views/app.html',
-    controller: 'AppCtrl'
+  .state('tabs', {
+    url: '/tabs',
+    abstract: true,
+    templateUrl: 'views/tabs.html',
+    controller: 'TabsCtrl'
+  })
+  .state('tabs.twitts', {
+    url: '/twitts',
+    views: {
+      'twitts-tab': {
+        templateUrl: 'views/twitts.html',
+        controller: 'TwittsCtrl'
+      }
+    }
+  })
+  .state('tabs.notifications', {
+    url: '/notifications',
+    views: {
+      'notifications-tab': {
+        templateUrl: 'views/notifications.html',
+        controller: 'NotificationsCtrl'
+      }
+    }
+  })
+  .state('tabs.profil', {
+    url: '/profil',
+    views: {
+      'profil-tab': {
+        templateUrl: 'views/profil.html',
+        controller: 'ProfilCtrl'
+      }
+    }
   });
-  $urlRouterProvider.otherwise('/app');
+  $urlRouterProvider.otherwise('/tabs/twitts');
 })
 
 .run(function($ionicPlatform) {
