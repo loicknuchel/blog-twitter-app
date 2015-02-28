@@ -6,7 +6,7 @@ Find explications on my [blog post](http://loic.knuchel.org/blog/2015/02/26/fair
 
 App Screenshot :
 
-![Current App](./screenshots/step3.png)
+![Current App](./screenshots/step4.png)
 
 ## Getting started
 
