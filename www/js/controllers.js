@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('AppCtrl', function($scope, TwittSrv){
+.controller('AppCtrl', function($scope, $ionicModal, TwittSrv){
   'use strict';
   TwittSrv.getTwitts().then(function(twitts){
     $scope.twitts = twitts;
@@ -23,4 +23,30 @@ angular.module('app')
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
   };
+
+  var newTwittModal = null;
+  $ionicModal.fromTemplateUrl('views/partials/new-twitt-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    newTwittModal = modal;
+  });
+  $scope.writeTwitt = function(){
+    newTwittModal.show();
+  };
+  $scope.cancelWriteTwitt = function(){
+    newTwittModal.hide();
+  };
+  $scope.sendTwitt = function(twitt){
+    newTwittModal.hide();
+    TwittSrv.sendTwitt(twitt).then(function(newTwitt){
+      $scope.twitts.unshift(newTwitt);
+      twitt.content = '';
+    });
+  };
+
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function(){
+    newTwittModal.remove();
+  });
 });

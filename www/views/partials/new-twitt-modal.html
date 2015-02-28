@@ -1,0 +1,18 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-calm">
+    <h1 class="title">Send twitt</h1>
+    <button class="button button-clear button-primary" ng-click="cancelWriteTwitt()">Cancel</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <small class="counter" ng-class="{assertive: twitt.content.length > 140, muted: !(twitt.content.length > 140)}">{{140-twitt.content.length}}</small>
+        <span class="input-label">What's new ?</span>
+        <textarea rows="5" placeholder="What's new ?" ng-model="twitt.content"></textarea>
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-full button-calm" ng-click="sendTwitt(twitt)" ng-disabled="twitt.content.length > 140">Twitt</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

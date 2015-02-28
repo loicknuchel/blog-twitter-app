@@ -1,6 +1,9 @@
 <ion-view>
   <ion-header-bar class="bar-calm">
     <h1 class="title">Timeline</h1>
+    <div class="buttons">
+      <button class="button button-icon ion-plus" ng-click="writeTwitt()"></button>
+    </div>
   </ion-header-bar>
   <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
