@@ -1,0 +1,14 @@
+<ion-popover-view>
+  <ion-content>
+    <div class="list" ng-click="popover.hide()">
+      <a class="item item-avatar" ui-sref="tabs.profil">
+        <img ng-src="{{user.avatar}}">
+        <h2>{{user.name}}</h2>
+        <p>@{{user.id}}</p>
+      </a>
+      <a class="item" href="#">Listes</a>
+      <a class="item" href="#">Brouillons</a>
+      <a class="item" href="#">Paramètres</a>
+    </div>
+  </ion-content>
+</ion-popover-view>

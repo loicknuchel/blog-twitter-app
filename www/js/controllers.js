@@ -5,7 +5,7 @@ angular.module('app')
 
 })
 
-.controller('TwittsCtrl', function($scope, $ionicModal, TwittSrv){
+.controller('TwittsCtrl', function($scope, $ionicModal, $ionicPopover, UserSrv, TwittSrv){
   'use strict';
   TwittSrv.getTwitts().then(function(twitts){
     $scope.twitts = twitts;
@@ -28,6 +28,15 @@ angular.module('app')
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
   };
+
+  UserSrv.getUser().then(function(user){
+    $scope.user = user;
+  });
+  $ionicPopover.fromTemplateUrl('views/partials/menu-popover.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
   var newTwittModal = null;
   $ionicModal.fromTemplateUrl('views/partials/new-twitt-modal.html', {
