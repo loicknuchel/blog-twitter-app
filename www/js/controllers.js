@@ -1,37 +1,31 @@
 angular.module('app')
 
-.controller('TabsCtrl', function($scope){
+.controller('TabsCtrl', function($scope, UserSrv){
   'use strict';
-
+  UserSrv.getUser().then(function(user){
+    $scope.user = user;
+  });
 })
 
-.controller('TwittsCtrl', function($scope, $ionicModal, $ionicPopover, UserSrv, TwittSrv){
+.controller('TwittsCtrl', function($scope, $ionicModal, $ionicPopover, Timeline){
   'use strict';
-  TwittSrv.getTwitts().then(function(twitts){
-    $scope.twitts = twitts;
-  });
+  $scope.twitts = Timeline.twitts;
+  Timeline.init();
 
   $scope.doRefresh = function(){
-    TwittSrv.getNewTwitts().then(function(newTwitts){
-      $scope.twitts = newTwitts.concat($scope.twitts);
-    }).finally(function() {
+    Timeline.refresh().finally(function(){
       // Stop the ion-refresher from spinning
       $scope.$broadcast('scroll.refreshComplete');
     });
   };
 
   $scope.loadMore = function(){
-    TwittSrv.getMoreTwitts().then(function(olderTwitts){
-      $scope.twitts = $scope.twitts.concat(olderTwitts);
-    }).finally(function() {
+    Timeline.loadMore().finally(function(){
       // Stop the ion-infinite-scroll from spinning
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });
   };
 
-  UserSrv.getUser().then(function(user){
-    $scope.user = user;
-  });
   $ionicPopover.fromTemplateUrl('views/partials/menu-popover.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -53,8 +47,7 @@ angular.module('app')
   };
   $scope.sendTwitt = function(twitt){
     newTwittModal.hide();
-    TwittSrv.sendTwitt(twitt).then(function(newTwitt){
-      $scope.twitts.unshift(newTwitt);
+    Timeline.send(twitt).then(function(){
       twitt.content = '';
     });
   };
@@ -62,6 +55,14 @@ angular.module('app')
   //Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function(){
     newTwittModal.remove();
+  });
+})
+
+.controller('TwittCtrl', function($scope, $stateParams, Timeline){
+  'use strict';
+  var id = $stateParams.id;
+  Timeline.get(id).then(function(twitt){
+    $scope.twitt = twitt;
   });
 })
 

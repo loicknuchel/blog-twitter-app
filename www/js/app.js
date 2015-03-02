@@ -18,6 +18,15 @@ angular.module('app', ['ionic'])
       }
     }
   })
+  .state('tabs.twitt', {
+    url: '/twitt/:id',
+    views: {
+      'twitts-tab': {
+        templateUrl: 'views/twitt.html',
+        controller: 'TwittCtrl'
+      }
+    }
+  })
   .state('tabs.notifications', {
     url: '/notifications',
     views: {

@@ -1,0 +1,29 @@
+<ion-view>
+  <ion-header-bar class="bar-calm">
+    <button class="button icon-left ion-chevron-left button-clear" ui-sref="tabs.twitts"> Timeline</button>
+    <h1 class="title">Tweet</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item item-avatar">
+        <img ng-src="{{twitt.user.avatar}}">
+        <h2>{{twitt.user.name}}</h2>
+        <p>@{{twitt.user.id}}</p>
+      </div>
+      <div class="item item-body">
+        <p>{{twitt.content}}</p>
+        <p><small>{{twitt.meta.time | datetime}}</small></p>
+        <p>
+          <a href="#" class="subdued" ng-if="twitt.meta.rt > 0"><b>{{twitt.meta.rt}}</b> RETWEET</a>
+          <a href="#" class="subdued" ng-if="twitt.meta.fav > 0"><b>{{twitt.meta.fav}}</b> FAVORIS</a>
+        </p>
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#"><i class="icon ion-reply"></i></a>
+        <a class="tab-item" href="#"><i class="icon ion-loop"></i></a>
+        <a class="tab-item" href="#"><i class="icon ion-star"></i></a>
+        <a class="tab-item" href="#"><i class="icon ion-share"></i></a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
